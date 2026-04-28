@@ -1,0 +1,21 @@
+.logo {
+    max-width: 182.19px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: -1px;
+
+    white-space: nowrap;
+}
+
+header {
+    height: 72px;
+    border: 1px solid black;
+
+    display: flex;
+    align-items: center;
+}

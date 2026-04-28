@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KINETIC Footwear</title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: "BeVietnamPro";
+      src: url("../assets/fonts/BeVietnamPro-Regular.woff") format("woff");
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: "BeVietnamPro";
+      src: url("../assets/fonts/BeVietnamPro-Medium.woff") format("woff");
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: "BeVietnamPro";
+      src: url("../assets/fonts/BeVietnamPro-Bold.woff") format("woff");
+      font-weight: 700;
+    }
+
+    :root {
+      --bg: #0c1609;
+      --card: #182214;
+      --card-border: #3c4b35;
+      --muted: #9ca3af;
+      --muted-2: #6b7280;
+      --neon: #39ff14;
+      --dark: #121212;
+    }
+
+    body {
+      margin: 0;
+      font-family: "BeVietnamPro", Arial, sans-serif;
+      background: var(--bg);
+      color: #fff;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+      background: rgba(18, 18, 18, 0.8);
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .brand {
+      color: var(--neon);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      font-size: 24px;
+    }
+    .nav-link {
+      color: var(--muted) !important;
+      font-weight: 500;
+      font-size: 15px;
+      margin: 0 6px;
+    }
+    .nav-link.active {
+      color: var(--neon) !important;
+      border-bottom: 2px solid var(--neon);
+    }
+
+    .search-box {
+      background: #1e1e1e;
+      border: none;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 8px 16px;
+      width: 240px;
+    }
+
+    .hero {
+      position: relative;
+      height: 820px;
+      overflow: hidden;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+    .hero-slide.active {
+      opacity: 1;
+    }
+    .hero-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(12, 22, 9, 0.96) 0%, rgba(12, 22, 9, 0.6) 38%, rgba(12, 22, 9, 0) 62%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding-top: 300px;
+    }
+    .hero h1 {
+      color: var(--neon);
+      font-weight: 700;
+      font-size: clamp(42px, 7vw, 80px);
+      line-height: 1;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+    }
+    .hero p {
+      max-width: 520px;
+      color: #fff;
+      opacity: 0.92;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .btn-neon {
+      background: var(--neon);
+      color: var(--dark);
+      border: 1px solid var(--neon);
+      border-radius: 0;
+      font-weight: 700;
+      padding: 14px 34px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn-outline-light-k {
+      color: #fff;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 0;
+      font-weight: 700;
+      padding: 14px 34px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hero-indicators {
+      position: absolute;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      gap: 8px;
+    }
+    .hero-indicator {
+      width: 48px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+    }
+    .hero-indicator.active {
+      background: var(--neon);
+    }
+
+    .section-pad {
+      padding: 96px 0;
+    }
+    .f-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      height: 100%;
+    }
+    .icon-wrap {
+      width: 56px;
+      height: 56px;
+      background: rgba(57, 255, 20, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--neon);
+      margin-bottom: 14px;
+    }
+    .f-card h5 {
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .f-card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .eyebrow {
+      color: var(--neon);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+    .link-muted {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .product-card {
+      color: #fff;
+    }
+    .product-image {
+      height: 280px;
+      border-radius: 12px;
+      background: #182214;
+      overflow: hidden;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .product-card h6 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .price {
+      color: var(--neon);
+      font-size: 15px;
+    }
+    .rating {
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .testimonials {
+      background: #141e11;
+      position: relative;
+    }
+    .testimonials::before {
+      content: "";
+      position: absolute;
+      right: -96px;
+      top: -96px;
+      width: 384px;
+      height: 384px;
+      border-radius: 50%;
+      background: rgba(57, 255, 20, 0.05);
+      filter: blur(50px);
+    }
+    .t-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      height: 100%;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 14px;
+    }
+    .t-role {
+      color: var(--muted-2);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+    .t-text {
+      color: #d1d5db;
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+
+    .news-card .news-thumb {
+      height: 240px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .news-card .news-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .news-meta {
+      color: var(--neon);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .news-title {
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .footer {
+      background: #121212;
+      border-top: 1px solid #1e1e1e;
+      color: #fff;
+      margin-top: 8px;
+    }
+    .footer h6 {
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .footer p, .footer li, .footer a {
+      color: var(--muted-2);
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .subscribe {
+      display: flex;
+    }
+    .subscribe input {
+      flex: 1;
+      background: #1e1e1e;
+      border: 0;
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 6px 0 0 6px;
+      font-size: 14px;
+    }
+    .subscribe button {
+      border: 0;
+      background: var(--neon);
+      color: var(--dark);
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+    }
+    .copyright {
+      border-top: 1px solid #1e1e1e;
+      color: var(--muted-2);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      padding: 33px 0 32px;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 991px) {
+      .hero {
+        height: 700px;
+      }
+      .hero-content {
+        padding-top: 210px;
+      }
+      .search-box {
+        width: 100%;
+        margin-top: 10px;
+      }
+      .section-pad {
+        padding: 72px 0;
+      }
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container-fluid px-4 py-3">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+        <a href="#" class="brand">KINETIC Footwear</a>
+        <nav class="d-flex align-items-center flex-wrap">
+          <a class="nav-link active" href="#">Trang chủ</a>
+          <a class="nav-link" href="#">Giày Nam</a>
+          <a class="nav-link" href="#">Giày Nữ</a>
+          <a class="nav-link" href="#">Giới thiệu</a>
+          <a class="nav-link" href="#news">Tin tức</a>
+          <a class="nav-link" href="#footer">Liên hệ</a>
+        </nav>
+        <div class="d-flex align-items-center gap-3">
+          <input class="search-box" placeholder="Tìm kiếm sản phẩm...">
+          <span style="color:#9ca3af;">♡</span>
+          <span style="color:#9ca3af;">🛒</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-slide active" style="background-image:url('https://www.figma.com/api/mcp/asset/f4855861-7364-45d8-8884-2c11e8a2f43b');"></div>
+    <div class="hero-slide" style="background-image:url('https://www.figma.com/api/mcp/asset/c22314ac-a2b0-4253-a219-a7a7a3bd4fb4');"></div>
+    <div class="hero-slide" style="background-image:url('https://www.figma.com/api/mcp/asset/563d14a1-7f15-4ace-9759-aa648fee05a1');"></div>
+    <div class="container hero-content">
+      <h1 id="heroTitle">BỘ SƯU TẬP MỚI</h1>
+      <p id="heroDesc">Kỹ thuật đỉnh cao, phong cách vượt thời đại. Khám phá sự kết hợp giữa công nghệ Kinetic và thời trang đường phố.</p>
+      <div class="d-flex gap-3 flex-wrap">
+        <button class="btn btn-neon">Mua ngay</button>
+        <button class="btn btn-outline-light-k">Chi tiết</button>
+      </div>
+    </div>
+    <div class="hero-indicators">
+      <div class="hero-indicator active" data-slide="0"></div>
+      <div class="hero-indicator" data-slide="1"></div>
+      <div class="hero-indicator" data-slide="2"></div>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-3">
+          <div class="f-card">
+            <div class="icon-wrap">✓</div>
+            <h5>Chất lượng</h5>
+            <p>Vật liệu cao cấp nhất</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="f-card">
+            <div class="icon-wrap">↻</div>
+            <h5>Giao hàng</h5>
+            <p>Siêu tốc trong 24h</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="f-card">
+            <div class="icon-wrap">$</div>
+            <h5>Giá cả</h5>
+            <p>Tốt nhất phân khúc</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="f-card">
+            <div class="icon-wrap">☎</div>
+            <h5>Hỗ trợ</h5>
+            <p>Tư vấn 24/7 nhiệt tình</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad pt-0">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-5">
+        <div>
+          <div class="eyebrow">Hàng mới về</div>
+          <p class="section-title">Sản Phẩm Nổi Bật</p>
+        </div>
+        <a href="#" class="link-muted">Xem tất cả →</a>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-3">
+          <div class="product-card">
+            <div class="product-image"><img src="https://www.figma.com/api/mcp/asset/c6332f73-54a8-4216-a667-e0f5a975dd42" alt=""></div>
+            <h6>KINETIC X1 Nebula</h6>
+            <div class="d-flex justify-content-between">
+              <span class="price">1.200.000đ</span>
+              <span class="rating">★ 4.9 (124)</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="product-card">
+            <div class="product-image"><img src="https://www.figma.com/api/mcp/asset/c22314ac-a2b0-4253-a219-a7a7a3bd4fb4" alt=""></div>
+            <h6>KINETIC Volt Runner</h6>
+            <div class="d-flex justify-content-between">
+              <span class="price">1.850.000đ</span>
+              <span class="rating">★ 5.0 (86)</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="product-card">
+            <div class="product-image"><img src="https://www.figma.com/api/mcp/asset/2360b2ac-1454-4b41-a06c-e2b11f5d54cf" alt=""></div>
+            <h6>KINETIC Onyx Edge</h6>
+            <div class="d-flex justify-content-between">
+              <span class="price">1.550.000đ</span>
+              <span class="rating">★ 4.8 (210)</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="product-card">
+            <div class="product-image"><img src="https://www.figma.com/api/mcp/asset/563d14a1-7f15-4ace-9759-aa648fee05a1" alt=""></div>
+            <h6>KINETIC Heritage L2</h6>
+            <div class="d-flex justify-content-between">
+              <span class="price">2.200.000đ</span>
+              <span class="rating">★ 4.7 (54)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad testimonials">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="section-title mb-2">Khách Hàng Nói Gì?</p>
+        <p style="color:#9ca3af;">Gia nhập cộng đồng 10.000+ vận động viên</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-4">
+          <div class="t-card">
+            <div class="d-flex align-items-center">
+              <img class="avatar" src="https://www.figma.com/api/mcp/asset/5ffdf0c9-0fb5-4ded-b5a7-4686ed1a9572" alt="">
+              <div>
+                <div class="fw-bold">Lê Minh Quân</div>
+                <div class="t-role">Vận động viên điền kinh</div>
+              </div>
+            </div>
+            <p class="t-text">"Cảm giác chạy với Kinetic Volt thực sự khác biệt. Đế giày phản hồi lực rất tốt, giảm áp lực lên cổ chân rõ rệt."</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="t-card">
+            <div class="d-flex align-items-center">
+              <img class="avatar" src="https://www.figma.com/api/mcp/asset/9002d566-003d-46d7-b91a-a4ae5eedfea8" alt="">
+              <div>
+                <div class="fw-bold">Trần Thu Hà</div>
+                <div class="t-role">Fashion blogger</div>
+              </div>
+            </div>
+            <p class="t-text">"Thiết kế của KINETIC luôn mang hơi hướng tương lai. Phối đồ cực kỳ dễ và tạo điểm nhấn mạnh cho outfit của mình."</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="t-card">
+            <div class="d-flex align-items-center">
+              <img class="avatar" src="https://www.figma.com/api/mcp/asset/26fe472b-3813-42fc-856d-498244609c4f" alt="">
+              <div>
+                <div class="fw-bold">Nguyễn Quốc Huy</div>
+                <div class="t-role">Kiến trúc sư</div>
+              </div>
+            </div>
+            <p class="t-text">"Dịch vụ chăm sóc khách hàng tuyệt vời. Giao hàng nhanh và đóng gói rất chuyên nghiệp, đẳng cấp."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news" class="section-pad">
+    <div class="container">
+      <p class="section-title text-center mb-5">Tạp Chí KINETIC</p>
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-4 news-card">
+          <div class="news-thumb"><img src="https://www.figma.com/api/mcp/asset/595c9c68-5c54-42bf-802d-a446c8117683" alt=""></div>
+          <div class="news-meta">Xu hướng • 12/04/2024</div>
+          <h3 class="news-title">5 Xu Hướng Sneaker Không Thể Bỏ Qua Trong Mùa Hè Này</h3>
+        </div>
+        <div class="col-md-6 col-xl-4 news-card">
+          <div class="news-thumb"><img src="https://www.figma.com/api/mcp/asset/d40edabe-ffc8-436c-a782-19595dcad0c1" alt=""></div>
+          <div class="news-meta">Công nghệ • 08/04/2024</div>
+          <h3 class="news-title">Đế Giày Carbon 3D: Cuộc Cách Mạng Hiệu Suất Của KINETIC</h3>
+        </div>
+        <div class="col-md-6 col-xl-4 news-card">
+          <div class="news-thumb"><img src="https://www.figma.com/api/mcp/asset/f1dc1529-addb-4df4-90fe-acc45bc7736e" alt=""></div>
+          <div class="news-meta">Sự kiện • 05/04/2024</div>
+          <h3 class="news-title">KINETIC x StreetVibe: Buổi Ra Mắt Giày Giới Hạn Tại Sài Gòn</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer" class="footer">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <h6 style="color:#39ff14;">KINETIC FOOTWEAR</h6>
+          <p>Chúng tôi không chỉ bán giày, chúng tôi mang đến trải nghiệm vận động đỉnh cao với công nghệ dẫn đầu thế giới.</p>
+          <p>◉ ◉</p>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <h6>Liên kết nhanh</h6>
+          <ul>
+            <li><a href="#">Sản phẩm nam</a></li>
+            <li><a href="#">Sản phẩm nữ</a></li>
+            <li><a href="#">Giảm giá</a></li>
+            <li><a href="#">Đại lý</a></li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <h6>Hỗ trợ khách hàng</h6>
+          <ul>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Shipping info</a></li>
+            <li><a href="#">Returns</a></li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <h6>Đăng ký nhận tin</h6>
+          <p>Nhận ngay ưu đãi 10% cho lần mua đầu tiên.</p>
+          <form class="subscribe" id="subForm">
+            <input type="email" id="subEmail" placeholder="Email của bạn..." required>
+            <button type="submit">GỬI</button>
+          </form>
+        </div>
+      </div>
+      <div class="copyright">© 2024 KINETIC FOOTWEAR. HIGH-PERFORMANCE ENGINEERING.</div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/jquery-4.0.0.min.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(function() {
+      var heroData = [
+        {
+          title: "BỘ SƯU TẬP MỚI",
+          desc: "Kỹ thuật đỉnh cao, phong cách vượt thời đại. Khám phá sự kết hợp giữa công nghệ Kinetic và thời trang đường phố."
+        },
+        {
+          title: "TỐC ĐỘ VÔ HẠN",
+          desc: "Dòng sản phẩm Volt Runner mang đến sự bùng nổ năng lượng trên mỗi bước chạy của bạn."
+        },
+        {
+          title: "PHONG CÁCH DI SẢN",
+          desc: "Heritage L2: Khi sự sang trọng của chất liệu da gặp gỡ công nghệ đế giày hiện đại nhất."
+        }
+      ];
+      var current = 0;
+      var timer;
+
+      function showSlide(index) {
+        current = index;
+        $(".hero-slide").removeClass("active").eq(index).addClass("active");
+        $(".hero-indicator").removeClass("active").eq(index).addClass("active");
+        $("#heroTitle").text(heroData[index].title);
+        $("#heroDesc").text(heroData[index].desc);
+      }
+
+      function startAuto() {
+        clearInterval(timer);
+        timer = setInterval(function() {
+          var next = (current + 1) % heroData.length;
+          showSlide(next);
+        }, 5000);
+      }
+
+      $(".hero-indicator").on("click", function() {
+        showSlide(parseInt($(this).attr("data-slide"), 10));
+        startAuto();
+      });
+
+      $("#subForm").on("submit", function(e) {
+        e.preventDefault();
+        var email = $("#subEmail").val().trim();
+        if (!email) {
+          return;
+        }
+        alert("Cảm ơn bạn đã đăng ký: " + email);
+        this.reset();
+      });
+
+      startAuto();
+    });
+  </script>
+</body>
+</html>
+
