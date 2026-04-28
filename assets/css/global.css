@@ -1,0 +1,41 @@
+/* ===== FONT ===== */
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  src: url('../fonts/BeVietnamPro-Regular.woff') format('woff');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  src: url('../fonts/BeVietnamPro-Bold.woff') format('woff');
+  font-weight: 700;
+}
+
+/* ===== MATERIAL ICON ===== */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  src: url('../fonts/MaterialSymbolsOutlined.woff2') format('woff2');
+}
+
+/* ===== RESET + DEFAULT ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font mặc định toàn trang */
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ===== ICON DEFAULT ===== */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+}
