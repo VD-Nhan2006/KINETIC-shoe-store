@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KINETIC - Đăng nhập</title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: "BeVietnamPro";
+      src: url("../assets/fonts/BeVietnamPro-Regular.woff") format("woff");
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: "BeVietnamPro";
+      src: url("../assets/fonts/BeVietnamPro-Medium.woff") format("woff");
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: "BeVietnamPro";
+      src: url("../assets/fonts/BeVietnamPro-Bold.woff") format("woff");
+      font-weight: 700;
+    }
+    @font-face {
+      font-family: "Material Symbols Outlined";
+      font-style: normal;
+      font-weight: 400;
+      src: url("../assets/fonts/MaterialSymbolsOutlined.woff2") format("woff2");
+    }
+
+    :root {
+      --bg: #0c1609;
+      --neon: #39ff14;
+      --text: #ffffff;
+      --muted: #a1a1aa;
+      --muted-2: #71717a;
+      --line: #27272a;
+      --panel: rgba(30, 30, 30, 0.6);
+      --input: rgba(24, 24, 27, 0.5);
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: "BeVietnamPro", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .material-symbols-outlined {
+      font-family: "Material Symbols Outlined";
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      white-space: nowrap;
+      -webkit-font-feature-settings: "liga";
+      font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(9, 9, 11, 0.8);
+      border-bottom: 1px solid rgba(39, 39, 42, 0.5);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      color: #a3e635;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 24px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #2a2a2d;
+      border-radius: 50%;
+      background: transparent;
+      color: #a3e635;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .login-main {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 20px;
+      overflow: hidden;
+    }
+
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      opacity: 0.2;
+      background-image: url("https://www.figma.com/api/mcp/asset/8faa2e0b-fcf4-40d6-b4ef-5337d2f09b8f");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .blur-circle-1,
+    .blur-circle-2 {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .blur-circle-1 {
+      width: 600px;
+      height: 600px;
+      right: -256px;
+      top: -394px;
+      background: rgba(57, 255, 20, 0.1);
+      filter: blur(60px);
+    }
+    .blur-circle-2 {
+      width: 400px;
+      height: 400px;
+      left: -128px;
+      bottom: -197px;
+      background: rgba(57, 255, 20, 0.05);
+      filter: blur(50px);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 448px;
+      position: relative;
+      z-index: 2;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      padding: 40px;
+    }
+
+    .title {
+      font-size: clamp(34px, 5vw, 40px);
+      font-weight: 700;
+      text-align: center;
+      margin: 0;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      text-align: center;
+      margin: 8px 0 28px;
+      font-size: 15px;
+    }
+
+    .label {
+      color: var(--muted-2);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+      font-weight: 700;
+    }
+
+    .helper-link {
+      color: var(--muted-2);
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .helper-link:hover {
+      color: var(--neon);
+    }
+    .forgot-wrap {
+      margin-top: 8px;
+      text-align: right;
+    }
+
+    .input-wrap {
+      background: var(--input);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .input-wrap input::placeholder {
+      color: #52525b;
+    }
+
+    .toggle-pass {
+      background: transparent;
+      border: 0;
+      color: #71717a;
+      padding: 0;
+      margin-left: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-login {
+      width: 100%;
+      height: 48px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--neon);
+      color: #09090b;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    .divider {
+      margin: 20px 0 16px;
+      position: relative;
+      text-align: center;
+    }
+
+    .divider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: #27272a;
+      transform: translateY(-50%);
+    }
+
+    .divider span {
+      position: relative;
+      background: #18181b;
+      color: #71717a;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+      padding: 2px 14px;
+      font-weight: 700;
+    }
+
+    .social-btn {
+      height: 44px;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .social-btn:hover {
+      border-color: #3f5d31;
+      color: var(--neon);
+      background: rgba(57, 255, 20, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .google-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 2px;
+    }
+    .google-dot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .facebook-icon {
+      width: 15px;
+      height: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .facebook-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .register-row {
+      margin-top: 16px;
+      font-size: 14px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .register-row a {
+      color: var(--neon);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .login-footer {
+      border-top: 1px solid #18181b;
+      background: #09090b;
+      padding: 18px 20px;
+      font-size: 10px;
+      letter-spacing: -0.2px;
+      text-transform: uppercase;
+      color: #52525b;
+    }
+    .login-footer .brand-mini {
+      color: #a3e635;
+      font-weight: 700;
+    }
+    .footer-link {
+      color: #52525b;
+      text-decoration: none;
+      margin-left: 16px;
+    }
+
+    @media (max-width: 576px) {
+      .login-card {
+        padding: 28px 18px;
+      }
+      .login-footer .d-flex {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .footer-link {
+        margin-left: 0;
+        margin-right: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container-fluid px-4 py-3 d-flex align-items-center justify-content-between">
+      <a href="./index.html" class="logo">KINETIC</a>
+      <a href="./index.html" class="icon-btn" aria-label="Quay lại trang chủ">
+        <span class="material-symbols-outlined">home</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="login-main">
+    <div class="bg-layer"></div>
+    <div class="blur-circle-1"></div>
+    <div class="blur-circle-2"></div>
+
+    <section class="login-card">
+      <h1 class="title">Đăng nhập</h1>
+      <p class="subtitle">Truy cập vào hệ thống hiệu năng KINETIC</p>
+
+      <form id="loginForm">
+        <div class="mb-4">
+          <label class="label" for="identity">Email hoặc số điện thoại</label>
+          <div class="input-wrap">
+            <input id="identity" type="text" placeholder="user@kinetic.gear" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="mb-2">
+            <label class="label mb-0" for="password">Mật khẩu</label>
+          </div>
+          <div class="input-wrap">
+            <input id="password" type="password" placeholder="••••••••" required>
+            <button class="toggle-pass" type="button" id="togglePass" aria-label="Hiển thị mật khẩu">
+              <span class="material-symbols-outlined" id="togglePassIcon">visibility</span>
+            </button>
+          </div>
+          <div class="forgot-wrap">
+            <a href="#" class="helper-link">Quên mật khẩu?</a>
+          </div>
+        </div>
+
+        <button class="btn-login" type="submit">Đăng nhập</button>
+      </form>
+
+      <div class="divider"><span>Hoặc đăng nhập bằng</span></div>
+
+      <div class="row g-3">
+        <div class="col-6">
+          <a class="social-btn" href="#" role="button">
+            <span class="google-dot">
+              <img src="https://www.figma.com/api/mcp/asset/1ef64d45-b7de-40ba-aafc-dc583687e616" alt="">
+            </span>
+            Google
+          </a>
+        </div>
+        <div class="col-6">
+          <a class="social-btn" href="#" role="button">
+            <span class="facebook-icon">
+              <img src="https://www.figma.com/api/mcp/asset/a07efa7d-79da-4f5f-9de8-a93ffee7f8ad" alt="">
+            </span>
+            Facebook
+          </a>
+        </div>
+      </div>
+
+      <div class="register-row">
+        Chưa có tài khoản?
+        <a href="#">Đăng ký ngay</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="login-footer">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="brand-mini">Kinetic</span>
+        <span>© 2024 KINETIC PERFORMANCE GEAR. ALL RIGHTS RESERVED.</span>
+        <span>
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms Of Service</a>
+          <a href="#" class="footer-link">Support</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var togglePass = document.getElementById("togglePass");
+      var passInput = document.getElementById("password");
+      var icon = document.getElementById("togglePassIcon");
+      var loginForm = document.getElementById("loginForm");
+      var identityInput = document.getElementById("identity");
+
+      if (togglePass && passInput && icon) {
+        togglePass.addEventListener("click", function() {
+          var isPassword = passInput.type === "password";
+          passInput.type = isPassword ? "text" : "password";
+          icon.textContent = isPassword ? "visibility_off" : "visibility";
+        });
+      }
+
+      if (loginForm && identityInput) {
+        loginForm.addEventListener("submit", function(e) {
+          e.preventDefault();
+          var identity = identityInput.value.trim();
+          if (!identity) {
+            return;
+          }
+          alert("Đăng nhập thành công (demo).");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

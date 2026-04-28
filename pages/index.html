@@ -21,6 +21,12 @@
       src: url("../assets/fonts/BeVietnamPro-Bold.woff") format("woff");
       font-weight: 700;
     }
+    @font-face {
+      font-family: "Material Symbols Outlined";
+      font-style: normal;
+      font-weight: 400;
+      src: url("../assets/fonts/MaterialSymbolsOutlined.woff2") format("woff2");
+    }
 
     :root {
       --bg: #0c1609;
@@ -73,6 +79,78 @@
       font-size: 14px;
       padding: 8px 16px;
       width: 240px;
+    }
+    .search-btn {
+      border: 1px solid #2a2a2a;
+      background: #1e1e1e;
+      color: #9ca3af;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      line-height: 1;
+    }
+    .search-btn:hover {
+      color: var(--neon);
+      border-color: #38512f;
+    }
+    .material-symbols-outlined {
+      font-family: "Material Symbols Outlined";
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: "liga";
+      font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+    .icon-link {
+      color: #9ca3af;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      min-height: 34px;
+    }
+    .icon-link:hover {
+      color: var(--neon);
+    }
+    .auth-menu {
+      position: relative;
+    }
+    .auth-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      min-width: 150px;
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 8px;
+      display: none;
+      z-index: 1200;
+    }
+    .auth-menu:hover .auth-dropdown {
+      display: block;
+    }
+    .auth-dropdown a {
+      display: block;
+      color: #d1d5db;
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .auth-dropdown a:hover {
+      background: #2a2a2a;
+      color: var(--neon);
     }
 
     .hero {
@@ -178,6 +256,9 @@
       font-weight: 700;
       color: var(--neon);
       margin-bottom: 14px;
+    }
+    .icon-wrap .material-symbols-outlined {
+      font-size: 28px;
     }
     .f-card h5 {
       margin-bottom: 8px;
@@ -318,6 +399,10 @@
       font-size: 14px;
       line-height: 1.8;
     }
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
     .footer ul {
       list-style: none;
       padding: 0;
@@ -388,10 +473,23 @@
           <a class="nav-link" href="#news">Tin tức</a>
           <a class="nav-link" href="#footer">Liên hệ</a>
         </nav>
-        <div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center gap-2">
           <input class="search-box" placeholder="Tìm kiếm sản phẩm...">
-          <span style="color:#9ca3af;">♡</span>
-          <span style="color:#9ca3af;">🛒</span>
+          <button class="search-btn d-inline-flex align-items-center justify-content-center" type="button" aria-label="Tìm kiếm">
+            <span class="material-symbols-outlined">search</span>
+          </button>
+          <div class="auth-menu">
+            <a href="#" class="icon-link" aria-label="Tài khoản">
+              <span class="material-symbols-outlined">person</span>
+            </a>
+            <div class="auth-dropdown">
+              <a href="login.html">Đăng nhập</a>
+              <a href="#">Đăng ký</a>
+            </div>
+          </div>
+          <a href="#" class="icon-link" aria-label="Giỏ hàng">
+            <span class="material-symbols-outlined">shopping_cart</span>
+          </a>
         </div>
       </div>
     </div>
@@ -421,28 +519,28 @@
       <div class="row g-4">
         <div class="col-md-6 col-xl-3">
           <div class="f-card">
-            <div class="icon-wrap">✓</div>
+            <div class="icon-wrap"><span class="material-symbols-outlined">verified</span></div>
             <h5>Chất lượng</h5>
             <p>Vật liệu cao cấp nhất</p>
           </div>
         </div>
         <div class="col-md-6 col-xl-3">
           <div class="f-card">
-            <div class="icon-wrap">↻</div>
+            <div class="icon-wrap"><span class="material-symbols-outlined">local_shipping</span></div>
             <h5>Giao hàng</h5>
             <p>Siêu tốc trong 24h</p>
           </div>
         </div>
         <div class="col-md-6 col-xl-3">
           <div class="f-card">
-            <div class="icon-wrap">$</div>
+            <div class="icon-wrap"><span class="material-symbols-outlined">sell</span></div>
             <h5>Giá cả</h5>
             <p>Tốt nhất phân khúc</p>
           </div>
         </div>
         <div class="col-md-6 col-xl-3">
           <div class="f-card">
-            <div class="icon-wrap">☎</div>
+            <div class="icon-wrap"><span class="material-symbols-outlined">support_agent</span></div>
             <h5>Hỗ trợ</h5>
             <p>Tư vấn 24/7 nhiệt tình</p>
           </div>
@@ -581,7 +679,14 @@
         <div class="col-md-6 col-lg-3">
           <h6 style="color:#39ff14;">KINETIC FOOTWEAR</h6>
           <p>Chúng tôi không chỉ bán giày, chúng tôi mang đến trải nghiệm vận động đỉnh cao với công nghệ dẫn đầu thế giới.</p>
-          <p>◉ ◉</p>
+          <div class="social-icons">
+            <a href="#" class="icon-link" aria-label="Facebook">
+              <span class="material-symbols-outlined">public</span>
+            </a>
+            <a href="#" class="icon-link" aria-label="Instagram">
+              <span class="material-symbols-outlined">photo_camera</span>
+            </a>
+          </div>
         </div>
         <div class="col-md-6 col-lg-3">
           <h6>Liên kết nhanh</h6>
